@@ -15,7 +15,8 @@ def analyze_directory(directory):
         ".java": "Java",
         ".css": "CSS",
         ".md": "Markdown",
-        ".json": "JSON"
+        ".json": "JSON",
+        ".cs": "C#"
     }
 
     # Duyệt qua mỗi file trong thư mục
