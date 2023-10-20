@@ -13,7 +13,9 @@ def analyze_directory(directory):
         ".html": "HTML",
         ".php": "PHP",
         ".java": "Java",
-        ".css": "CSS"
+        ".css": "CSS",
+        ".md": "Markdown",
+        ".json": "JSON"
     }
 
     # Duyệt qua mỗi file trong thư mục
