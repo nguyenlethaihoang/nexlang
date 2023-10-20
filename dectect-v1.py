@@ -16,7 +16,12 @@ def analyze_directory(directory):
         ".css": "CSS",
         ".md": "Markdown",
         ".json": "JSON",
-        ".cs": "C#"
+        ".cs": "C#",
+        ".yml": "YAML",
+        ".ps1": "Powershell",
+        "Dockerfile": "Dockerfile",
+        ".sln": "Microsoft Visual Studio Solution",
+        ".xml": "XML"
     }
 
     # Duyệt qua mỗi file trong thư mục
