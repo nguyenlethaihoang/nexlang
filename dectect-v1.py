@@ -21,7 +21,8 @@ def analyze_directory(directory):
         ".ps1": "Powershell",
         "Dockerfile": "Dockerfile",
         ".sln": "Microsoft Visual Studio Solution",
-        ".xml": "XML"
+        ".xml": "XML",
+        ".sh": "Shell"
     }
 
     # Duyệt qua mỗi file trong thư mục
@@ -76,5 +77,5 @@ if __name__ == "__main__":
     directory_path = "C:\\Users\\tinho\\OneDrive\\Desktop\\006-CoreVPS-main"
     lang_percentages = analyze_directory(directory_path)
 
-    n = 3
+    n = 2
     display_chart_terminal(lang_percentages, n)
