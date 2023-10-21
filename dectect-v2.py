@@ -200,8 +200,17 @@ def display_results(lang_percentages, frameworks):
     for lang, framework in frameworks.items():
         print(f"{lang}: {framework}")
 
+def analyze_projects(directory):
+    projects = [f.path for f in os.scandir(directory) if f.is_dir()]
+    for project in projects:
+        print(f"Analyzing project: {os.path.basename(project)}")
+        lang_percentages = analyze_directory(project)
+        detected_frameworks = detect_framework(project, frameworks_info)
+        display_results(lang_percentages, detected_frameworks)
+        print("\n" + "-"*50 + "\n")
+
 if __name__ == "__main__":
-    directory_path = "C:\\Users\\tinho\\OneDrive\\Desktop\\newcore"
+    directory_path = "C:\\Users\\tinho\\OneDrive\\Desktop\\project"
     frameworks_info = {
         "Python": {"requirements.txt": "Unknown Python Framework", "setup.py": "Unknown Python Framework"},
         "JavaScript": {"package.json": "Unknown JavaScript/TypeScript Framework"},
@@ -211,6 +220,4 @@ if __name__ == "__main__":
         # Thêm các ngôn ngữ và file cấu hình tương ứng ở đây
     }
     
-    lang_percentages = analyze_directory(directory_path)
-    detected_frameworks = detect_framework(directory_path, frameworks_info)
-    display_results(lang_percentages, detected_frameworks)
+    analyze_projects(directory_path)
