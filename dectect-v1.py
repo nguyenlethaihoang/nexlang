@@ -113,7 +113,7 @@ def display_chart_terminal(data, n):
 
     # Biểu diễn chart dựa trên ký tự
     chart = ""
-    total_blocks = 20  # Số ký tự dùng biểu diễn 100%
+    total_blocks = 20 
 
     for language, percentage in sorted_data:
         num_blocks = int((percentage / 100) * total_blocks)
@@ -126,7 +126,7 @@ def display_chart_terminal(data, n):
 
 
 if __name__ == "__main__":
-    directory_path = "C:\\Users\\tinho\\OneDrive\\Desktop\\006-CoreVPS-main"
+    directory_path = "C:\\Users\\tinho\\OneDrive\\Desktop\\newcore"
     lang_percentages = analyze_directory(directory_path)
     n = 3
     display_chart_terminal(lang_percentages, n)
