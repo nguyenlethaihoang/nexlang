@@ -43,15 +43,16 @@ def analyze_directory(directory):
         "Shell": ['#']
     }
 
-    def filter_comments(lines, language):
+    def filter_comments_and_empty_lines(lines, language):
         comment_symbols = language_comments.get(language, [])
-        if not comment_symbols:
-            return lines
-
-        in_block_comment = False
         filtered_lines = []
+        in_block_comment = False
+
         for line in lines:
             stripped_line = line.strip()
+            if not stripped_line:  # Bỏ qua các dòng trắng
+                continue
+
             if len(comment_symbols) == 1:
                 if stripped_line.startswith(comment_symbols[0]):
                     continue
@@ -84,14 +85,17 @@ def analyze_directory(directory):
             if ext in extension_to_language or file in extension_to_language:
                 lang = extension_to_language.get(ext, extension_to_language.get(file))
 
-                with open(os.path.join(root, file), 'r', encoding='utf-8', errors='ignore') as f:
-                    lines = f.readlines()
-                    lines = filter_comments(lines, lang)
-                    total_lines += len(lines)
-                    lang_percentages[lang] = lang_percentages.get(lang, 0) + len(lines)
+                try:
+                    with open(os.path.join(root, file), 'r', encoding='utf-8', errors='ignore') as f:
+                        lines = f.readlines()
+                        lines = filter_comments_and_empty_lines(lines, lang)
+                        total_lines += len(lines)
+                        lang_percentages[lang] = lang_percentages.get(lang, 0) + len(lines)
+                except Exception as e:
+                    print(f"Could not read file {file} due to {str(e)}")
 
     # Chuyển số dòng code thành tỷ lệ phần trăm
     for lang, count in lang_percentages.items():
-        lang_percentages[lang] = (count / total_lines) * 100
+        lang_percentages[lang] = (count / total_lines) * 100 if total_lines > 0 else 0
 
     return lang_percentages
