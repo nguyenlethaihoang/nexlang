@@ -130,3 +130,4 @@ if __name__ == "__main__":
     lang_percentages = analyze_directory(directory_path)
     n = 3
     display_chart_terminal(lang_percentages, n)
+ 
