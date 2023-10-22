@@ -15,7 +15,7 @@ def classify_language(file_path, language):
 
 
 def analyze_directory(directory, extension_to_language, language_comments, ignore_files, ignore_dirs):
-    lang_percentages = {}
+    lang_percentages = collections.defaultdict(int)
     total_lines = 0
 
     def filter_comments(lines, language):
@@ -80,15 +80,15 @@ def analyze_directory(directory, extension_to_language, language_comments, ignor
                             lines = [
                                 line for line in lines if line.strip() != ""]
                             lines = filter_comments(lines, lang)
-                            total_lines += len(lines)
-                            lang_percentages[lang] = lang_percentages.get(
-                                lang, 0) + len(lines)
+                            line_count = len(lines)
+                            total_lines += line_count
+                            lang_percentages[lang] += line_count
 
     scan_directory(directory)
 
-    for lang, count in lang_percentages.items():
-        lang_percentages[lang] = (count / total_lines) * 100
-    return lang_percentages
+    for lang in lang_percentages:
+        lang_percentages[lang] = (lang_percentages[lang] / total_lines) * 100
+    return dict(lang_percentages)
 
 
 def detect_framework(directory, frameworks_info):
@@ -140,7 +140,7 @@ def display_chart_terminal(data, n):
 
 def display_results(lang_percentages, frameworks):
     print("Language Statistics:")
-    display_chart_terminal(lang_percentages, 5)
+    display_chart_terminal(lang_percentages, 2)
 
     print("\nDetected Frameworks:")
     for lang, framework in frameworks.items():
