@@ -112,23 +112,24 @@ def analyze_directory(directory):
 
 def detect_framework(directory, frameworks_info):
     detected_frameworks = {}
-    for root, _, files in os.walk(directory):
-        for file in files:
-            file_path = os.path.join(root, file)
-            content = read_file_content(file_path)
-            for lang, config_files in frameworks_info.items():
-                if lang == "C#":
-                    if fnmatch.fnmatch(file, "*.csproj") or fnmatch.fnmatch(file, "*.sln"):
-                        detected_frameworks[lang] = detect_csharp_framework(file_path, content)
-                        break
-                elif file in config_files:
-                    if lang == "Python":
-                        detected_frameworks[lang] = detect_python_framework(content)
-                    elif lang == "JavaScript":
-                        detected_frameworks[lang] = detect_javascript_framework(file_path, content)
-                    else:
-                        detected_frameworks[lang] = config_files[file]
-                    break
+
+    for lang, config_files in frameworks_info.items():
+        for config_file, unknown_framework in config_files.items():
+            config_file_path = os.path.join(directory, config_file)
+
+            if os.path.exists(config_file_path):
+                content = read_file_content(config_file_path)
+
+                if lang == "Python":
+                    detected_frameworks[lang] = detect_python_framework(content)
+                elif lang == "JavaScript":
+                    detected_frameworks[lang] = detect_javascript_framework(config_file_path, content)
+                elif lang == "C#":
+                    if fnmatch.fnmatch(config_file, "*.csproj") or fnmatch.fnmatch(config_file, "*.sln"):
+                        detected_frameworks[lang] = detect_csharp_framework(config_file_path, content)
+                else:
+                    detected_frameworks[lang] = unknown_framework
+
     return detected_frameworks
 
 def read_file_content(file_path):
