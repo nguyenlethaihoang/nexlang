@@ -1,0 +1,17 @@
+{
+  "Python": ["#"],
+  "JavaScript": ["//", "/*", "*/"],
+  "HTML": ["<!--", "-->"],
+  "PHP": ["//", "/*", "*/"],
+  "Java": ["//", "/*", "*/"],
+  "CSS": ["/*", "*/"],
+  "Markdown": [],
+  "JSON": [],
+  "C#": ["//", "/*", "*/"],
+  "YAML": ["#"],
+  "Powershell": ["#"],
+  "Dockerfile": ["#"],
+  "Microsoft Visual Studio Solution": [],
+  "XML": ["<!--", "-->"],
+  "Shell": ["#"]
+}

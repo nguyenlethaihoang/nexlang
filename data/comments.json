@@ -1,17 +1,62 @@
 {
-  "Python": ["#"],
-  "JavaScript": ["//", "/*", "*/"],
-  "HTML": ["<!--", "-->"],
-  "PHP": ["//", "/*", "*/"],
-  "Java": ["//", "/*", "*/"],
-  "CSS": ["/*", "*/"],
-  "Markdown": [],
-  "JSON": [],
-  "C#": ["//", "/*", "*/"],
-  "YAML": ["#"],
-  "Powershell": ["#"],
-  "Dockerfile": ["#"],
-  "Microsoft Visual Studio Solution": [],
-  "XML": ["<!--", "-->"],
-  "Shell": ["#"]
+  "Python": {
+    "single": ["#"],
+    "block": []
+  },
+  "JavaScript": {
+    "single": ["//"],
+    "block": ["/*", "*/"]
+  },
+  "HTML": {
+    "single": [],
+    "block": ["<!--", "-->"]
+  },
+  "PHP": {
+    "single": ["//"],
+    "block": ["/*", "*/"]
+  },
+  "Java": {
+    "single": ["//"],
+    "block": ["/*", "*/"]
+  },
+  "CSS": {
+    "single": [],
+    "block": ["/*", "*/"]
+  },
+  "Markdown": {
+    "single": [],
+    "block": []
+  },
+  "JSON": {
+    "single": [],
+    "block": []
+  },
+  "C#": {
+    "single": ["//"],
+    "block": ["/*", "*/"]
+  },
+  "YAML": {
+    "single": ["#"],
+    "block": []
+  },
+  "Powershell": {
+    "single": ["#"],
+    "block": []
+  },
+  "Dockerfile": {
+    "single": ["#"],
+    "block": []
+  },
+  "Microsoft Visual Studio Solution": {
+    "single": [],
+    "block": []
+  },
+  "XML": {
+    "single": [],
+    "block": ["<!--", "-->"]
+  },
+  "Shell": {
+    "single": ["#"],
+    "block": []
+  }
 }
