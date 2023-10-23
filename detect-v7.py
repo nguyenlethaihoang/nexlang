@@ -3,21 +3,10 @@ import fnmatch
 import re
 import collections
 
-from detectors import detect_framework
-from detectors import detect_csharp_framework
-from detectors import detect_python_framework
-from detectors import detect_javascript_framework
+from detectors import detect_framework, detect_csharp_framework, detect_python_framework, detect_javascript_framework
 from display import display_chart_terminal, display_results
 from settings import load_comments_from_json, load_languages_from_json, load_config_from_json, load_settings_from_template
-
-
-def classify_language(file_path, language):
-    if language == "JavaScript":
-        if fnmatch.fnmatch(file_path, "*.ts"):
-            return "TypeScript"
-        if fnmatch.fnmatch(file_path, "*.jsx"):
-            return "ReactJS"
-    return language
+from language_classifier import classify_language
 
 
 def analyze_directory(directory, extension_to_language, language_comments, ignore_files, ignore_dirs):
