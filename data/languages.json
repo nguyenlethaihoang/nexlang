@@ -1,0 +1,17 @@
+{
+    ".py": "Python",
+    ".js": "JavaScript",
+    ".html": "HTML",
+    ".php": "PHP",
+    ".java": "Java",
+    ".css": "CSS",
+    ".md": "Markdown",
+    ".json": "JSON",
+    ".cs": "C#",
+    ".yml": "YAML",
+    ".ps1": "Powershell",
+    "Dockerfile": "Dockerfile",
+    ".sln": "Microsoft Visual Studio Solution",
+    ".xml": "XML",
+    ".sh": "Shell"
+}
