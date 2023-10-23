@@ -6,7 +6,8 @@ from detectors import detect_framework, detect_csharp_framework, detect_python_f
 from display import display_chart_terminal, display_results
 from settings import load_comments_from_json, load_languages_from_json, load_config_from_json, load_settings_from_template
 from language_classifier import classify_language
-from comment_filter import filter_comments  # Importing filter_comments function
+# Importing filter_comments function
+from comment_filter import filter_comments, filter_comments_with_pygments
 
 
 def analyze_directory(directory, extension_to_language, language_comments, ignore_files, ignore_dirs):
@@ -30,14 +31,20 @@ def analyze_directory(directory, extension_to_language, language_comments, ignor
                             ext, extension_to_language.get(file_name))
                         lang = classify_language(file_path, lang)
 
-                        with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
-                            lines = [line for line in f if line.strip() != ""]
-                            lines = filter_comments(
-                                lines, lang, language_comments)
+                        try:
+                            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                                lines = [
+                                    line for line in f if line.strip() != ""]
+                                lines = filter_comments(
+                                    lines, lang, language_comments)
+                                # lines = filter_comments_with_pygments(
+                                #     lines, lang)
 
-                            line_count = len(lines)
-                            total_lines += line_count
-                            lang_percentages[lang] += line_count
+                                line_count = len(lines)
+                                total_lines += line_count
+                                lang_percentages[lang] += line_count
+                        except IOError as e:
+                            print(f"Error reading file {file_path}: {e}")
 
     scan_directory(directory)
 

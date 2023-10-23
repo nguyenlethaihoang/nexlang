@@ -1,6 +1,31 @@
 import re
-
+from pygments.lexers import get_lexer_by_name
+from pygments.token import Token
 # Khả năng mở rộng cho filter_comments: Thay vì dựa vào số lượng ký tự bình luận để xác định cách lọc, hãy cố gắng thiết kế một cơ chế linh hoạt hơn. Ví dụ: bạn có thể định nghĩa cấu trúc dữ liệu cho từng loại bình luận (single-line, block start, block end) và xử lý dựa trên đó.
+
+
+def map_language_to_pygments_alias(language_name):
+    mapping = {
+        "Microsoft Visual Studio Solution": None,  # Pygments does not support this
+        # Add more mappings if needed
+    }
+    return mapping.get(language_name, language_name)
+
+
+def filter_comments_with_pygments(lines, language):
+    language_alias = map_language_to_pygments_alias(language)
+    if not language_alias:
+        return lines
+    lexer = get_lexer_by_name(language.lower(), stripall=True)
+    tokens = lexer.get_tokens('\n'.join(lines))
+
+    filtered_code = []
+
+    for token_type, content in tokens:
+        if token_type not in (Token.Comment, Token.Comment.Multiline, Token.Comment.Preproc, Token.Comment.Single):
+            filtered_code.extend(content.split('\n'))
+
+    return [line for line in filtered_code if line.strip() != ""]
 
 
 def filter_comments(lines, language, language_comments):

@@ -75,14 +75,18 @@ def analyze_directory(directory, extension_to_language, language_comments, ignor
                             ext, extension_to_language.get(file_name))
                         lang = classify_language(file_path, lang)
 
-                        with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
-                            lines = f.readlines()
-                            lines = [
-                                line for line in lines if line.strip() != ""]
-                            lines = filter_comments(lines, lang)
-                            line_count = len(lines)
-                            total_lines += line_count
-                            lang_percentages[lang] += line_count
+                        try:
+                            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                                lines = [
+                                    line for line in f if line.strip() != ""]
+                                lines = filter_comments(
+                                    lines, lang, language_comments)
+
+                                line_count = len(lines)
+                                total_lines += line_count
+                                lang_percentages[lang] += line_count
+                        except IOError as e:
+                            print(f"Error reading file {file_path}: {e}")
 
     scan_directory(directory)
 
