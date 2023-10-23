@@ -1,5 +1,4 @@
 import os
-import json
 import fnmatch
 import re
 import collections
@@ -9,6 +8,7 @@ from detectors import detect_csharp_framework
 from detectors import detect_python_framework
 from detectors import detect_javascript_framework
 from display import display_chart_terminal, display_results
+from settings import load_comments_from_json, load_languages_from_json, load_config_from_json, load_settings_from_template
 
 
 def classify_language(file_path, language):
@@ -95,35 +95,6 @@ def analyze_directory(directory, extension_to_language, language_comments, ignor
     for lang in lang_percentages:
         lang_percentages[lang] = (lang_percentages[lang] / total_lines) * 100
     return dict(lang_percentages)
-
-
-def load_comments_from_json(filename="data/comments.json"):
-    with open(filename, 'r', encoding='utf-8') as file:
-        return json.load(file)
-
-
-def load_languages_from_json(filename="data/languages.json"):
-    with open(filename, 'r', encoding='utf-8') as file:
-        return json.load(file)
-
-
-def load_config_from_json(filename="data/config.json"):
-    with open(filename, 'r', encoding='utf-8') as file:
-        return json.load(file)
-
-
-def load_settings_from_template(filename="settings_template.txt"):
-    settings = {}
-    with open(filename, 'r', encoding='utf-8') as file:
-        for line in file:
-            key, value = line.strip().split(' = ')
-            # Chuyển đổi giá trị sang kiểu dữ liệu thích hợp
-            if value.isdigit():
-                value = int(value)
-            elif value.startswith('"') and value.endswith('"'):
-                value = value[1:-1]
-            settings[key] = value
-    return settings
 
 
 def analyze_projects(directory, frameworks_info, extension_to_language, language_comments, ignore_files, ignore_dirs, n, total_blocks):

@@ -1,0 +1,13 @@
+{
+    "ignore_files": [
+      "package-lock.json",
+      "yarn.lock",
+      ".DS_Store"
+    ],
+    "ignore_dirs": [
+      "node_modules",
+      "__pycache__",
+      ".git"
+    ]
+  }
+  
