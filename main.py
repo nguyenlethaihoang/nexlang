@@ -10,7 +10,7 @@ from language_classifier import classify_language
 from comment_filter import filter_comments, filter_comments_with_pygments
 
 
-def analyze_directory(directory, extension_to_language, language_comments, ignore_files, ignore_dirs):
+def analyze_directory(directory, extension_to_language, language_comments, ignore_files, ignore_dirs, detect_algorithm):
     lang_percentages = collections.defaultdict(int)
     total_lines = 0
 
@@ -35,10 +35,12 @@ def analyze_directory(directory, extension_to_language, language_comments, ignor
                             with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
                                 lines = [
                                     line for line in f if line.strip() != ""]
-                                lines = filter_comments(
-                                    lines, lang, language_comments)
-                                # lines = filter_comments_with_pygments(
-                                #     lines, lang)
+                                if detect_algorithm == 1:
+                                    lines = filter_comments(
+                                        lines, lang, language_comments)
+                                elif detect_algorithm == 2:
+                                    lines = filter_comments_with_pygments(
+                                        lines, lang)
 
                                 line_count = len(lines)
                                 total_lines += line_count
@@ -53,12 +55,12 @@ def analyze_directory(directory, extension_to_language, language_comments, ignor
     return dict(lang_percentages)
 
 
-def analyze_projects(directory, frameworks_info, extension_to_language, language_comments, ignore_files, ignore_dirs, n, total_blocks):
+def analyze_projects(directory, frameworks_info, extension_to_language, language_comments, ignore_files, ignore_dirs, n, total_blocks, detect_algorithm):
     projects = [f.path for f in os.scandir(directory) if f.is_dir()]
     for project in projects:
         print(f"Analyzing project: {os.path.basename(project)}")
         lang_percentages = analyze_directory(
-            project, extension_to_language, language_comments, ignore_files, ignore_dirs)
+            project, extension_to_language, language_comments, ignore_files, ignore_dirs, detect_algorithm)
         detected_frameworks = detect_framework(project, frameworks_info)
         display_results(lang_percentages, detected_frameworks, n, total_blocks)
         print("\n" + "-"*50 + "\n")
@@ -69,6 +71,7 @@ def main():
     directory_path = settings["directory_path"]
     total_blocks = settings["total_blocks"]
     n = settings["n"]
+    detect_algorithm = settings["detect_algorithm"]
 
     frameworks_info = {
         "Python": {"app.py": detect_python_framework, "manage.py": lambda _: "Django"},
@@ -84,7 +87,7 @@ def main():
     ignore_dirs = config["ignore_dirs"]
 
     analyze_projects(directory_path, frameworks_info, extension_to_language,
-                     language_comments, ignore_files, ignore_dirs, n, total_blocks)
+                     language_comments, ignore_files, ignore_dirs, n, total_blocks, detect_algorithm)
 
 
 if __name__ == "__main__":

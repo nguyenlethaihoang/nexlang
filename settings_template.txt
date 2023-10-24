@@ -1,3 +1,17 @@
+#################
+#  Information  #
+#################
+
 directory_path = "C:\Users\tinho\OneDrive\Desktop\project"
 total_blocks = 20
-n = 4
+n = 2       # display languages of projects
+
+##########################################
+#                                        #
+# Algorithm for dectetion languages      #
+# 1. Default (performance)               #
+# 2. Pygments                            #
+#                                        #
+##########################################
+
+detect_algorithm = 1
