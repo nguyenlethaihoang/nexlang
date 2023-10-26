@@ -14,6 +14,8 @@ def detect_javascript_framework(file_content):
             return "Vue.js"
         elif "angular" in all_dependencies:
             return "Angular"
+        elif "express" in all_dependencies:
+            return "Node.js"
     except json.JSONDecodeError:
         print("Error: Could not parse package.json")
         return "Unknown"
