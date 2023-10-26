@@ -4,7 +4,7 @@
 
 directory_path = "C:\Users\tinho\OneDrive\Desktop\project"
 total_blocks = 20
-n = 2       # display languages of projects
+n = 4       # display languages of projects
 
 ##########################################
 #                                        #
