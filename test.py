@@ -4,7 +4,7 @@ import subprocess
 def is_git_repository(directory):
     # Kiểm tra xem có tồn tại thư mục .git trong thư mục được chỉ định hay không
     return os.path.isdir(os.path.join(directory, ".git"))
-
+ 
 def init_temp_git_repo(directory):
     subprocess.run(["git", "init"], cwd=directory)
     subprocess.run(["git", "add", "."], cwd=directory)
