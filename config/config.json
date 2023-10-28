@@ -1,0 +1,14 @@
+{
+    "git_paths": [
+        "/path/to/git/repo1",
+        "/path/to/git/repo2"
+    ],
+    "language_detection": {
+        "enable": true,
+        "some_other_option": "value"
+    },
+    "framework_detection": {
+        "enable": true,
+        "signature_file": "signatures.json"
+    }
+}

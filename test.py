@@ -9,8 +9,11 @@ def init_temp_git_repo(directory):
     subprocess.run(["git", "init"], cwd=directory)
     subprocess.run(["git", "add", "."], cwd=directory)
     subprocess.run(["git", "commit", "-m", "temp commit"], cwd=directory)
-    subprocess.run(["git", "config", "--global", "user.email", "you@example.com"], cwd=directory)
-    subprocess.run(["git", "config", "--global", "user.name", "Your Name"], cwd=directory)
+    # subprocess.run(["git", "config", "--global", "user.email", "you@example.com"], cwd=directory)
+    # subprocess.run(["git", "config", "--global", "user.name", "Your Name"], cwd=directory)
+    subprocess.run(["git", "config", "--global", "user.email", "18520058@gm.uit.edu.vn"], cwd=directory)
+    subprocess.run(["git", "config", "--global", "user.name", "brandon"], cwd=directory)
+    
     
 
 def detect_languages_with_linguist(directory):

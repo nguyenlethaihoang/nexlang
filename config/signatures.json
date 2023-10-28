@@ -1,0 +1,22 @@
+{
+    "frameworks": [
+        {
+            "name": "React",
+            "signature_files": [
+                "package.json"
+            ],
+            "signature_content": [
+                "\"react\""
+            ]
+        },
+        {
+            "name": "Angular",
+            "signature_files": [
+                "package.json"
+            ],
+            "signature_content": [
+                "\"@angular/core\""
+            ]
+        }
+    ]
+}
